@@ -37,7 +37,8 @@ namespace ns3
 {
   namespace nnn
   {
-    NS_LOG_COMPONENT_DEFINE ("FlexPointToPointHelper");
+
+  	NS_LOG_COMPONENT_DEFINE ("FlexPointToPointHelper");
 
     FlexPointToPointHelper::FlexPointToPointHelper ()
     {
@@ -185,7 +186,7 @@ namespace ns3
 
       //
       // If we are provided an OutputStreamWrapper, we are expected to use it, and
-      // to providd a context.  We are free to come up with our own context if we
+      // to provide a context.  We are free to come up with our own context if we
       // want, and use the AsciiTraceHelper Hook*WithContext functions, but for
       // compatibility and simplicity, we just use Config::Connect and let it deal
       // with the context.

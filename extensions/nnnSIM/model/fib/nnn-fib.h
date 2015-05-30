@@ -32,13 +32,21 @@ namespace ns3
 {
   namespace nnn
   {
-    class Interest;
-    typedef Interest InterestHeader;
-
-    /**
+  	/**
      * @ingroup nnn
      * @defgroup nnn-fib FIB
      */
+
+    /**
+     * @ingroup nnn-fib
+     * @brief Namespace for FIB operations
+     */
+    namespace fib
+    {
+    }
+
+    class Interest;
+    typedef Interest InterestHeader;
 
     /**
      * @ingroup nnn-fib

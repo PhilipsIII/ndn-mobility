@@ -37,6 +37,15 @@ namespace ns3
 {
   namespace nnn
   {
+	/**
+     * @ingroup nnn
+     * @defgroup nnn-pdu-buffer PDUBuffer
+     */
+
+   /**
+    * @ingroup nnn-pdu-buffer
+    * @brief Class implementing PDUBuffer functionality
+    */
     class PDUBuffer : public Object,
     protected ns3::nnn::nnnSIM::trie_with_policy<
       NNNAddress,
@@ -51,60 +60,121 @@ namespace ns3
 	  ns3::nnn::nnnSIM::counting_policy_traits
       > super;
 
+      /**
+       * \brief Interface ID
+       *
+       * \return interface ID
+       */
       static TypeId GetTypeId (void);
 
+      /**
+       * @brief Default constructor
+       */
       PDUBuffer ();
 
       PDUBuffer (Time retx);
 
+      /**
+       * \brief Virtual destructor
+       */
       virtual
       ~PDUBuffer ();
 
+      /**
+       * \brief Add PDU's NNNAddress to the buffer
+       */
       void
       AddDestination (const NNNAddress &addr);
 
+      /**
+       * \brief Add PDU's <Ptr>NNNAddress to the buffer
+       */
       void
       AddDestination (Ptr<NNNAddress> addr);
 
+      /**
+       * \brief Remove PDU's NNNAddress from the buffer
+       */
       void
       RemoveDestination (const NNNAddress &addr);
 
+      /**
+       * \brief Remove PDU's <Ptr>NNNAddress from the buffer
+       */
       void
       RemoveDestination (Ptr<NNNAddress> addr);
 
+      /**
+       *  \brief Check in the buffer whether Destination NNNAddress
+       *  exists or not and find out what it is
+       */
       bool
       DestinationExists (const NNNAddress &addr);
 
+      /**
+       *  \brief Check in the buffer whether Destination <Ptr>NNNAddress
+       *  exists or not and find out what it is
+       */
       bool
       DestinationExists (Ptr<NNNAddress> addr);
 
+      /**
+       *  \brief Push the SO PDU to the NNNAddress added in the buffer
+       */
       void
       PushSO (const NNNAddress &addr, Ptr<const SO> so_p);
 
+      /**
+       *  \brief Push the SO PDU to the <Ptr>NNNAddress added in the buffer
+       */
       void
       PushSO (Ptr<NNNAddress> addr, Ptr<const SO> so_p);
 
+      /**
+       *  \brief Push the DO PDU to the NNNAddress added in the buffer
+       */
       void
       PushDO (const NNNAddress &addr, Ptr<const DO> do_p);
 
+      /**
+       *  \brief Push the DO PDU to the <Ptr>NNNAddress added in the buffer
+       */
       void
       PushDO (Ptr<NNNAddress> addr, Ptr<const DO> do_p);
 
+      /**
+       *  \brief Push the DU PDU to the NNNAddress added in the buffer
+       */
       void
       PushDU (const NNNAddress &addr, Ptr<const DU> du_p);
 
+      /**
+       *  \brief Push the DU PDU to the <Ptr>NNNAddress added in the buffer
+       */
       void
       PushDU (Ptr<NNNAddress> addr, Ptr<const DU> du_p);
 
+      /**
+       *  \brief Create a queue for PDUs with the same NNNAddress
+       */
       std::queue<Ptr<Packet> >
       PopQueue (const NNNAddress &addr);
 
+      /**
+       *  \brief Create a queue for PDUs with the same <Ptr>NNNAddress
+       */
       std::queue<Ptr<Packet> >
       PopQueue (Ptr<NNNAddress> addr);
 
+      /**
+       *  \brief get the size of queue of PDUs with the same NNNAddress
+       */
       uint
       QueueSize (const NNNAddress &addr);
 
+      /**
+       *  \brief get the size of queue of PDUs with the same <Ptr>NNNAddress
+       */
       uint
       QueueSize (Ptr<NNNAddress> addr);
 

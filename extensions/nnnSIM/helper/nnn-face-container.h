@@ -30,6 +30,15 @@
 namespace ns3 {
   namespace nnn {
 
+    /**
+     * @ingroup nnn-helpers
+     * \brief A pool for Nnn faces
+     *
+     * Provides tools to perform basic manipulation on faces, such as
+     * setting metrics and states on faces
+     *
+     * \see NnnStackHelper
+     */
     class FaceContainer: public SimpleRefCount<FaceContainer>
     {
     private:
