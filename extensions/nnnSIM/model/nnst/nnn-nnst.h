@@ -51,15 +51,20 @@ namespace ns3
 {
   namespace nnn
   {
+	/**
+     * @ingroup nnn
+     * @defgroup nnn-nnst NNST
+     */
+
+    /**
+     * @ingroup nnn-nnst
+     * \brief Namespace for NNST operations
+     */
     namespace nnst {
 
       class Entry;
     }
 
-    /**
-     * @ingroup nnn
-     * @defgroup nnn NNST
-     */
     class NNST : public Object,
     protected nnnSIM::trie_with_policy<
     NNNAddress,
@@ -80,6 +85,9 @@ namespace ns3
 
       ~NNST();
 
+      /**
+       *  \brief Find the closest NNNAddress to the given address in NNST
+       */
       Ptr<nnst::Entry>
       ClosestSector (const NNNAddress &prefix);
       
