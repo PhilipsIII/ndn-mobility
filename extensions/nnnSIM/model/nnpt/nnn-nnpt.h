@@ -3,7 +3,7 @@
  * Copyright 2014 Waseda University, Sato Laboratory
  *   Author: Takahiro Miyamoto <mt3.mos@gmail.com>
  *           Jairo Eduardo Lopez <jairo@ruri.waseda.jp>
- *
+ *			 Zhu Li <philipzhuli1990@ruri.waseda.jp>
  *  nnn-nnpt.h is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
@@ -44,11 +44,24 @@ namespace ns3
 {
   namespace nnn
   {
+	/**
+     * @ingroup nnn
+     * @defgroup nnn-nnpt NNPT
+     */
+
+    /**
+     * @ingroup nnn-nnpt
+     * \brief Namespace for NNPT operations
+     */
     namespace nnpt
     {
       class Entry;
     }
 
+    /**
+     * @ingroup nnn-nnpt
+     * @brief Class implementing NNPT structure & functionality
+     */
     class NNPT : public Object
     {
     public:
@@ -63,6 +76,10 @@ namespace ns3
       struct newname {};
       struct st_lease {};
 
+      /**
+       *  \brief NNPT contains multiple indices: index<oldname>, index<newname>
+       *  and index<st_lease>
+       */
       typedef multi_index_container<
       	nnpt::Entry,
       	indexed_by<
@@ -89,70 +106,145 @@ namespace ns3
       typedef pair_set::index<newname>::type pair_set_by_newname;
       typedef pair_set::index<st_lease>::type pair_set_by_lease;
 
+      /**
+       * \brief Interface ID
+       *
+       * \return interface ID
+       */
       static TypeId GetTypeId ();
 
+      /**
+       * \brief Default constructor
+       */
       NNPT();
 
+      /**
+       * \brief Virtual destructor
+       */
       virtual
       ~NNPT();
 
+      /**
+       * \brief Add an entry in NNPT
+       */
       void
       addEntry (Ptr<const NNNAddress> oldName, Ptr<const NNNAddress> newName, Time lease_expire);
 
+      /**
+       * \brief Delete an entry in NNPT by oldName
+       */
       void
       deleteEntry (Ptr<const NNNAddress> oldName);
 
+      /**
+       * \brief Delete an entry in NNPT by nnptEntry
+       */
       void
       deleteEntry (nnpt::Entry nnptEntry);
 
+      /**
+       * \brief Delete an entry in NNPT by oldName & newName
+       */
       void
       deleteEntry (Ptr<const NNNAddress> oldName, Ptr<const NNNAddress> newName);
 
+      /**
+       * \brief Search for oldName in NNPT
+       */
       bool
       foundOldName (Ptr<const NNNAddress> name);
 
+      /**
+       * \brief Search for newName in NNPT
+       */
       bool
       foundNewName (Ptr<const NNNAddress> name);
 
+      /**
+       * \brief Search for the newName in name pair by
+       * using oldName in NNPT
+       */
       const NNNAddress&
       findPairedName (Ptr<const NNNAddress> oldName);
 
+      /**
+       * \brief Search for the oldName in the name pair
+       * by using newName in NNPT
+       */
       const NNNAddress&
       findPairedOldName (Ptr<const NNNAddress> newName);
 
+      /**
+       * \brief Search for the pointer of the newName in the name pair
+       * by using oldName in NNPT
+       */
       Ptr<const NNNAddress>
       findPairedNamePtr (Ptr<const NNNAddress> oldName);
 
+      /**
+       * \brief Search for the pointer of the oldName in the name pair
+       * by using newName in NNPT
+       */
       Ptr<const NNNAddress>
       findPairedOldNamePtr (Ptr<const NNNAddress> newName);
 
+      /**
+       *  \brief Search for one nnpt-entry by one NNNAddress
+       */
       nnpt::Entry
       findEntry (Ptr<const NNNAddress> name);
 
+      /**
+       *  \brief Update the expire time of the nnpt-entry
+       */
       void
       updateLeaseTime (Ptr<const NNNAddress> oldName, Time lease_expire);
 
+      /**
+       *  \brief Calculate the size of NNPT
+       */
       uint32_t
       size ();
 
+      /**
+       *  \brief Check whether the NNPT is empty
+       */
       bool
       isEmpty ();
 
+      /**
+       *  \brief Check the expire time of a NNNAddress's entry
+       */
       Time
       findNameExpireTime (Ptr<const NNNAddress> name);
 
+      /**
+       *  \brief Check the expire time of an entry
+       */
       Time
       findNameExpireTime (nnpt::Entry nnptEntry);
 
+      /**
+       *  \brief Clean out the expired entries in NNPT
+       */
       void
       cleanExpired ();
 
+      /**
+       *  \brief Print out the NNPT
+       */
       void
       Print (std::ostream &os) const;
 
+      /**
+       *  \brief Print out the NNPT by the order of oldNames
+       */
       void
       printByAddress ();
 
+      /**
+       *  \brief Print out the NNPT by the order of leaseTime
+       */
       void
       printByLease ();
 

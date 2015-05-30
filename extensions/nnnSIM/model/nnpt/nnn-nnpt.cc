@@ -88,6 +88,7 @@ namespace ns3
       NS_LOG_FUNCTION (this);
       container.erase(nnptEntry);
     }
+// Missing deleteEntry (Ptr<const NNNAddress> oldName, Ptr<const NNNAddress> newName);
 
     bool
     NNPT::foundOldName (Ptr<const NNNAddress> name)
