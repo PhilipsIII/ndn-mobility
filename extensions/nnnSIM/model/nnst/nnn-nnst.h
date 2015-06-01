@@ -86,118 +86,220 @@ namespace ns3
       ~NNST();
 
       /**
-       *  \brief Find the closest NNNAddress to the given address in NNST
+       *  \brief Find the entry with the closest NNNAddress in NNST
+       *  to the given address
        */
       Ptr<nnst::Entry>
       ClosestSector (const NNNAddress &prefix);
       
+      /**
+       *  \brief Find the closest NNNAddress in NNST to the given address
+       */
       Ptr<const NNNAddress>
       ClosestSectorNameInfo (const NNNAddress &prefix);
 
+      /**
+       *  \brief Find the closest <Ptr>NNNAddress in NNST to the given address
+       */
       Ptr<const NNNAddress>
       ClosestSectorNameInfo (Ptr<const NNNAddress> prefix);
 
+      /**
+       *  \brief Find the pair of the closest NNNAddress to the given address
+       *  and the local face in NNST
+       */
       std::pair<Ptr<Face>, Address>
       ClosestSectorFaceInfo (const NNNAddress &prefix, uint32_t skip);
 
+      /**
+       *  \brief Find the <Ptr>pair of the closest NNNAddress to the given address
+       *  and the local face in NNST
+       */
       std::pair<Ptr<Face>, Address>
       ClosestSectorFaceInfo (Ptr<const NNNAddress> prefix, uint32_t skip);
 
+      /**
+       *  \brief A vector of all Addresses of nodes within one hop distance
+       */
       std::vector<Ptr<const NNNAddress> >
       OneHopNameInfo (const NNNAddress &prefix);
 
+      /**
+       *  \brief A <Ptr>vector of all Addresses of nodes within one hop distance
+       */
       std::vector<Ptr<const NNNAddress> >
       OneHopNameInfo (Ptr<const NNNAddress> prefix);
 
+      /**
+       *  \brief A vector of pairs of all Addresses of nodes within one hop distance
+       *  and local faces to them
+       */
       std::vector<std::pair<Ptr<Face>, Address> >
       OneHopFaceInfo (const NNNAddress &prefix, uint32_t skip);
 
+      /**
+       *  \brief A <Ptr>vector of pairs of all Addresses of nodes within one hop distance
+       *  and local faces to them
+       */
       std::vector<std::pair<Ptr<Face>, Address> >
       OneHopFaceInfo (Ptr<const NNNAddress> prefix, uint32_t skip);
 
+      /**
+       *  \brief A vector of addresses of sub nodes within one hop distance
+       */
       std::vector<Ptr<const NNNAddress> >
       OneHopSubSectorNameInfo (const NNNAddress &prefix);
 
+      /**
+       *  \brief A <Ptr>vector of addresses of sub nodes within one hop distance
+       */
       std::vector<Ptr<const NNNAddress> >
       OneHopSubSectorNameInfo (Ptr<const NNNAddress> prefix);
 
+      /**
+       * \brief Find the local faces to sub nodes within one hop distance
+       * and their addresses in NNST
+       */
       std::vector<std::pair<Ptr<Face>, Address> >
       OneHopSubSectorFaceInfo (const NNNAddress &prefix, uint32_t skip);
 
+      /**
+       * \brief Find the local faces to sub nodes within one hop distance
+       * and their <Ptr>addresses in NNST
+       */
       std::vector<std::pair<Ptr<Face>, Address> >
       OneHopSubSectorFaceInfo (Ptr<const NNNAddress> prefix, uint32_t skip);
 
+      /**
+       * \brief A vector of addresses of parent node(s) within one hop distance
+       */
       std::vector<Ptr<const NNNAddress> >
       OneHopParentSectorNameInfo (const NNNAddress &prefix);
 
+      /**
+       * \brief A <Ptr>vector of addresses of parent node(s) within one hop distance
+       */
       std::vector<Ptr<const NNNAddress> >
       OneHopParentSectorNameInfo (Ptr<const NNNAddress> prefix);
 
+      /**
+       * \brief Find the local faces to parent node(s) within one hop distance
+       * and their addresses in NNST
+       */
       std::vector<std::pair<Ptr<Face>, Address> >
       OneHopParentSectorFaceInfo (const NNNAddress &prefix, uint32_t skip);
 
+      /**
+       * \brief Find the local faces to parent node(s) within one hop distance
+       * and their <Ptr>addresses in NNST
+       */
       std::vector<std::pair<Ptr<Face>, Address> >
       OneHopParentSectorFaceInfo (Ptr<const NNNAddress> prefix, uint32_t skip);
 
+      /**
+       * \brief Find an entry in nnst
+       */
       Ptr<nnst::Entry>
       Find (const NNNAddress &prefix);
 
+      /**
+       * \brief Add an entry to nnst(address, local_face, poa, expire_time, metric)
+       */
       Ptr<nnst::Entry>
       Add (const NNNAddress &prefix, Ptr<Face> face, Address poa, Time lease_expire, int32_t metric);
 
+      /**
+       * \brief Add entries with same address but different local faces(A node tends to connect to multiple faces)
+       */
       Ptr<nnst::Entry>
       Add (const Ptr<const NNNAddress> &prefix, std::vector<Ptr<Face> > faces, Address poa, Time lease_expire, int32_t metric);
 
+      /**
+       * \brief Add entries with same address but different local PoAs(A node tends to connect to multiple faces)
+       */
       Ptr<nnst::Entry>
       Add (const Ptr<const NNNAddress> &prefix, Ptr<Face> face, std::vector<Address> poas, Time lease_expire, int32_t metric);
 
+      /**
+       * \brief Add an entry to nnst(<Ptr>address, local_face, poa, expire_time, metric)
+       */
       Ptr<nnst::Entry>
       Add (const Ptr<const NNNAddress> &prefix, Ptr<Face> face, Address poa, Time lease_expire, int32_t metric);
 
-//      void
-//      Invalidate ();
-
+      /**
+       * \brief Update the metric status of the entry in nnst
+       */
       void
       UpdateStatus (const NNNAddress &prefix, Ptr<Face> face, nnst::FaceMetric::Status status);
 
+      /**
+       * \brief Update the expire time of the entry in nnst
+       */
       void
       UpdateLeaseTime (const NNNAddress &prefix, Time n_lease);
 
       /**
        * \brief Add or update routing metric of FIB next hop
        *
-       * Initial status of the next hop is set to YELLOW
+       * Initial status of the next hop is set to YELLOW(same as Smart Flooding)
        */
       void
       AddOrUpdateRoutingMetric (const NNNAddress &prefix, Ptr<Face> face, int32_t metric);
 
+      /**
+       * \brief Update the RTT of the entry in nnst
+       */
       void
       UpdateFaceRtt (const NNNAddress &prefix, Ptr<Face> face, const Time &sample);
 
       void
       InvalidateAll ();
 
+      /**
+       * \brief Remove an entry in nnst
+       */
       void
       Remove (const Ptr<const NNNAddress> &prefix);
 
+      /**
+       * \brief Remove entries refer to the specific face in nnst
+       */
       void
       RemoveFromAll (Ptr<Face> face);
 
+      /**
+       * \brief Remove entries refer to the specific PoA in nnst
+       */
       void
       RemoveFromAll (Address poa);
 
+      /**
+       * \brief Print out the whole nnst
+       */
       void
       Print (std::ostream &os) const;
 
+      /**
+       * \brief Print out nnst in order of metrics
+       */
       void
       PrintByMetric () const;
 
+      /**
+       * \brief Print out nnst in order of addresses
+       */
       void
       PrintByAddress () const;
 
+      /**
+       * \brief Print out nnst in order of expire time
+       */
       void
       PrintByLease () const;
 
+      /**
+       * \brief Print out nnst in order of faces
+       */
       void
       PrintByFace () const;
 
@@ -219,15 +321,27 @@ namespace ns3
       Ptr<nnst::Entry>
       Next (Ptr<nnst::Entry> item);
 
+      /**
+       * \brief Get the size of nnst
+       */
       uint32_t
       GetSize ();
 
+      /**
+       * \brief Get the nnst of a specific node
+       */
       Ptr<NNST>
       GetNNST (Ptr<Object> node);
 
+      /**
+       * \brief Find whether a specific address exists in nnst
+       */
       bool
       FoundName (const NNNAddress &prefix);
 
+      /**
+       * \brief Get All the PoAs of a specific address in nnst
+       */
       std::vector<Address>
       GetAllPoas (const NNNAddress &prefix);
 
