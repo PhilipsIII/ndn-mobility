@@ -27,7 +27,10 @@ namespace ns3
 {
   namespace nnn
   {
-
+   /**
+    * @ingroup nnn
+    * @brief NNN OEN packet (wire formats are defined in wire)
+    **/
     class OEN : public ENPDU
     {
     public:

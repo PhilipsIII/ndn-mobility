@@ -521,7 +521,7 @@ namespace ns3
 	  // Add personal PoAs
 	  oen_p->AddPersonalPoa (GetAllPoANames (face));
 
-	  // Send the create OEN PDU out the way it came
+	  // Send the created OEN PDU out the way it came
 	  face->SendOEN(oen_p, destAddr);
 
 	  NS_LOG_INFO ("Making a lease entry in (" << myAddr << ") for (" <<*produced3Nname << ") until " << absoluteLease.GetSeconds());
@@ -915,7 +915,7 @@ namespace ns3
 	  // If you start using the 3N name, execute the following
 	  if (willUseName)
 	    {
-	      // If this came from a REN PDU, signal that you have received
+	      // If this came from a REN_OEN PDU, signal that you have received
 	      if (m_sent_ren)
 		{
 		  m_sent_ren = false;
@@ -1004,7 +1004,7 @@ namespace ns3
 		    continue;
 
 		  // If we routed the INF already, skip this face
-		  if (routed && routedFace == face)
+		  if (routed && routedFace == outface)
 		    continue;
 
 		  // After all checks, start sending

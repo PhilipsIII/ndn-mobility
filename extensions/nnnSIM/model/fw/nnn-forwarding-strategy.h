@@ -168,7 +168,7 @@ namespace ns3
       flushBuffer (Ptr<Face> face, Ptr<NNNAddress> oldName, Ptr<NNNAddress> newName);
 
       /**
-       * \brief Actual processing of incoming Nnn content objects
+       * \brief Actual processing of incoming Nnn ENs
        *
        * Processing EN PDUs
        * @param face    incoming face

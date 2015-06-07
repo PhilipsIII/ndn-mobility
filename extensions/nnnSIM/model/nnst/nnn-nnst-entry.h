@@ -69,7 +69,7 @@ namespace ns3
        * - by face (used to find record and update metric)
        * - by Address
        * - by Lease time
-       * - by metric
+       * - by routing metric
        * - by position
        */
       /// @cond include_hidden
@@ -169,7 +169,7 @@ namespace ns3
 	UpdateLeaseTime (Time n_lease);
 
 	/**
-	 * \brief Add or update routing metric of FIB next hop
+	 * \brief Add or update routing metric of NNST next hop
 	 *
 	 * Initial status of the next hop is set to YELLOW
 	 */

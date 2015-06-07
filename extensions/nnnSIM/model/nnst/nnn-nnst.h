@@ -65,6 +65,10 @@ namespace ns3
       class Entry;
     }
 
+    /**
+     * @ingroup nnn-nnst
+     * @brief Class implementing NNST structure & functionality
+     */
     class NNST : public Object,
     protected nnnSIM::trie_with_policy<
     NNNAddress,
@@ -79,10 +83,22 @@ namespace ns3
 	  nnnSIM::counting_policy_traits
 	  > super;
 
+      /**
+       * \brief Interface ID
+       *
+       * \return interface ID
+       */
       static TypeId GetTypeId ();
 
+      /**
+       * \brief Default constructor
+       */
       NNST();
 
+      /**
+       * \brief Virtual destructor
+       */
+      virtual
       ~NNST();
 
       /**
@@ -215,7 +231,7 @@ namespace ns3
       Add (const Ptr<const NNNAddress> &prefix, std::vector<Ptr<Face> > faces, Address poa, Time lease_expire, int32_t metric);
 
       /**
-       * \brief Add entries with same address but different local PoAs(A node tends to connect to multiple faces)
+       * \brief Add entries with same address but different local PoAs(A node tends to connect through multiple PoAs)
        */
       Ptr<nnst::Entry>
       Add (const Ptr<const NNNAddress> &prefix, Ptr<Face> face, std::vector<Address> poas, Time lease_expire, int32_t metric);
@@ -355,12 +371,16 @@ namespace ns3
       Add (const Ptr<const NNNAddress> &prefix, Ptr<Face> face, Address poa, Time lease_expire, int32_t metric, char c);
 
       /**
-       * @brief Remove reference to a face from the entry. If entry had only this face, the whole
+       * @brief Remove reference to a face from the entry. If entry had only this face information, the whole
        * entry will be removed
        */
       void
       RemoveFace (super::parent_trie &item, Ptr<Face> face);
 
+      /**
+       * @brief Remove reference to a PoA from the entry. If entry had only this PoA information, the whole
+       * entry will be removed
+       */
       void
       RemovePoA (super::parent_trie &item, Address poa);
 
