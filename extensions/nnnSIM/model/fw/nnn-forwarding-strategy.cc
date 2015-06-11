@@ -1557,20 +1557,20 @@ namespace ns3
 		{
 		  std::vector<Address> poanames = GetAllPoANames (tmp);
 
-		  // Create the REN PDU to transmit
+		  // Create the DEN PDU to transmit
 		  Ptr<DEN> den_o = Create<DEN> ();
 		  Ptr<const NNNAddress> addr = GetNode3NNamePtr ();
 
-		  // Set the lifetime for the REN PDU
+		  // Set the lifetime for the DEN PDU
 		  den_o->SetLifetime (m_3n_lifetime);
-		  // Set the 3N name for the REN
+		  // Set the 3N name for the DEN
 		  den_o->SetName (*addr);
 		  // Add all the PoA names we found
 		  for (int i = 0; i < poanames.size (); i++)
 		    {
 		      den_o->AddPoa (poanames[i]);
 		    }
-		  // Send the REN throughout the Faces
+		  // Send the DEN throughout the Faces
 		  ok = tmp->SendDEN (den_o);
 
 		  if (ok)
@@ -1766,7 +1766,7 @@ namespace ns3
 
       pit::Entry::out_iterator out = pitEntry->GetOutgoing ().find (inFace);
 
-      // If we have sent interest for this data via this face, then update stats.
+      // If we have sent Interest for this data via this face, then update states.
       if (out != pitEntry->GetOutgoing ().end ())
 	{
 	  pitEntry->GetFibEntry ()->UpdateFaceRtt (inFace, Simulator::Now () - out->m_sendTime);
